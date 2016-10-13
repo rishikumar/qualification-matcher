@@ -6,6 +6,15 @@ public class Response {
   private String questionId;
   private String answer;
 
+  public Response() {
+    // default constructor required for JSON Data binding
+  }
+
+  public Response(String questionId, String answer) {
+    this.questionId = questionId;
+    this.answer = answer;
+  }
+
   @JsonProperty("Id")
   public String getQuestionId() {
     return questionId;

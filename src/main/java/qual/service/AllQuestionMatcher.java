@@ -13,11 +13,19 @@ public class AllQuestionMatcher extends Matcher {
   }
 
   boolean meetsQualifications(Application application) {
-    return application.getResponses().stream().allMatch(this::isMatchingOnQualifications);
+    return application.getResponses().size() > 0 &&
+        application.getResponses().stream().allMatch(this::isMatchingOnQualifications);
   }
 
   private boolean isMatchingOnQualifications(Response response) {
     Set<String> qualificationAnswers = qualification.getAnswersForQuestion(response.getQuestionId());
+
+    if (qualificationAnswers == null) {
+      // Can happen if an applicant has answered a question that we don't have in our qualifications.
+      // I'm making the assumption here that this is an error condition that will reject the Applicant
+      return false;
+    }
+
     return qualificationAnswers.contains(response.getAnswer());
   }
 
