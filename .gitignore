@@ -1,0 +1,6 @@
+*.iml
+build/
+.gradle/
+.env
+.idea
+.gradletasknamecache
