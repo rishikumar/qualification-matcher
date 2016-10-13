@@ -36,4 +36,10 @@ public class Qualification {
     return answers;
   }
 
+  @Override
+  public String toString() {
+    return "Qualification{" +
+        "questionMap=" + questionMap +
+        '}';
+  }
 }

@@ -19,4 +19,11 @@ public class Application {
     return responses;
   }
 
+  @Override
+  public String toString() {
+    return "Application{" +
+        "name='" + name + '\'' +
+        ", responses=" + responses +
+        '}';
+  }
 }

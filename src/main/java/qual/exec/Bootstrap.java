@@ -7,6 +7,7 @@ import qual.dao.ApplicationDao;
 import qual.dao.QualificationDao;
 import qual.model.Application;
 import qual.model.Qualification;
+import qual.service.AllQuestionMatcher;
 import qual.service.Matcher;
 
 import java.util.List;
@@ -22,15 +23,15 @@ public class Bootstrap {
     this.applicationDao = applicationDao;
   }
 
-  void start() {
+  private void start() {
     Qualification qualification = qualificationDao.findQualifications();
     List<Application> applications = applicationDao.findApplications();
 
-    Matcher matcher = new Matcher(qualification);
+    Matcher matcher = new AllQuestionMatcher(qualification);
     List<Application> qualifiedApplications = matcher.findMatchingApplications(applications);
 
     print(qualifiedApplications);
-    // TODO: Save output to a JSON file (to the build folder)
+    applicationDao.saveApplications(qualifiedApplications);
   }
 
 
@@ -40,7 +41,6 @@ public class Bootstrap {
 
   public static void main(String... args) {
     Injector injector = Guice.createInjector(new AppModule());
-
     Bootstrap application = injector.getInstance(Bootstrap.class);
 
     try {

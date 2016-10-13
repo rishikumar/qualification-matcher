@@ -15,4 +15,12 @@ public class Response {
   public String getAnswer() {
     return answer;
   }
+
+  @Override
+  public String toString() {
+    return "Response{" +
+        "questionId='" + questionId + '\'' +
+        ", answer='" + answer + '\'' +
+        '}';
+  }
 }
