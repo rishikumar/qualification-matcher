@@ -29,7 +29,7 @@ public class AppModule extends AbstractModule {
       properties.load(getClass().getClassLoader().getResourceAsStream("app.properties"));
     }
     catch (IOException e) {
-      System.out.println(e.toString());
+      e.printStackTrace();
     }
 
     Names.bindProperties(binder(), properties);

@@ -56,7 +56,7 @@ public class QualificationDaoImpl implements QualificationDao {
       root = objectMapper.readValue(getClass().getClassLoader().getResource(filename), JsonNode.class);
     }
     catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
     return root;

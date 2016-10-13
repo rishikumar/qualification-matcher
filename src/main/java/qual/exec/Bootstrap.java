@@ -35,7 +35,7 @@ public class Bootstrap {
 
 
   private void print(List<Application> applications) {
-    System.out.println(applications);
+    applications.forEach(System.out::println);
   }
 
   public static void main(String... args) {
