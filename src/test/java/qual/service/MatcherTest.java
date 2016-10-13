@@ -45,23 +45,22 @@ public class MatcherTest {
     List<Application> qualifiedApplicants = matcher.findMatchingApplications(applications);
 
     Assert.assertNotNull(qualifiedApplicants);
-    Assert.assertTrue(qualifiedApplicants.size() == 1);
+    Assert.assertTrue(qualifiedApplicants.size() == 2);
   }
 
   private Qualification getQualification() {
     Qualification qualification = new Qualification();
 
-    qualification.addQuestionAndAnswer("Q1", "A1");
-    qualification.addQuestionAndAnswer("Q1", "A2");
-    qualification.addQuestionAndAnswer("Q1", "A3");
-    qualification.addQuestionAndAnswer("Q2", "A1");
-    qualification.addQuestionAndAnswer("Q2", "A2");
-    qualification.addQuestionAndAnswer("Q3", "A1");
+    qualification.add("Q1", "A1");
+    qualification.add("Q1", "A2");
+    qualification.add("Q1", "A3");
+    qualification.add("Q2", "A1");
+    qualification.add("Q2", "A2");
+    qualification.add("Q3", "A1");
 
     return qualification;
   }
 
   // TODO: what happens if a user answered a question that isn't in the qualifications? Do we ignore it? Add a test for this
   // TODO: user doesn't have any questions and answers - they are all blank
-  // TODO:
 }

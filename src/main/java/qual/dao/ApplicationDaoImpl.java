@@ -8,15 +8,23 @@ import java.util.List;
 
 public class ApplicationDaoImpl implements ApplicationDao {
 
-  private String fileName;
+  private String filename;
 
   @Inject
-  public ApplicationDaoImpl(@Named("application.file.path") String fileName) {
-    this.fileName = fileName;
+  public ApplicationDaoImpl(@Named("application.file.path") String filename) {
+    this.filename = filename;
   }
 
   @Override
   public List<Application> findApplications() {
+    return parseJson();
+  }
+
+  private List<Application> parseJson() {
+//    JsonNode root = getRootNode();
     return null;
   }
+
+
+
 }

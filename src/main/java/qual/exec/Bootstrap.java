@@ -30,6 +30,7 @@ public class Bootstrap {
     List<Application> qualifiedApplications = matcher.findMatchingApplications(applications);
 
     print(qualifiedApplications);
+    // TODO: Save output to a JSON file (to the build folder)
   }
 
 
@@ -46,7 +47,7 @@ public class Bootstrap {
       application.start();
     }
     catch (Throwable t) {
-      System.out.println(t.toString());
+      t.printStackTrace();
     }
   }
 

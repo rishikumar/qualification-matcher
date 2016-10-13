@@ -7,20 +7,23 @@ import java.util.Set;
 
 public class Qualification {
 
-  private Map<String, Set<String>> questionMap = new HashMap<>();
+  private Map<String, Set<String>> questionMap;
 
-  public void addQuestionAndAnswer(String question, String answer) {
-    Set<String> answers = findExistingAnswers(question);
+  public Qualification() {
+     questionMap = new HashMap<>();
+  }
+
+  public void add(String questionId, String answer) {
+    Set<String> answers = findOrCreateWith(questionId);
     answers.add(answer);
   }
 
-  public Set<String> getAnswersForQuestion(String question) {
-    return questionMap.get(question);
+  public Set<String> getAnswersForQuestion(String questionId) {
+    return questionMap.get(questionId);
   }
 
-
-  private Set<String> findExistingAnswers(String question) {
-    Set<String> answers = questionMap.get(question);
+  private Set<String> findOrCreateWith(String questionId) {
+    Set<String> answers = questionMap.get(questionId);
 
     if (answers != null) {
       // we have a an object created to hold the answers
@@ -29,10 +32,8 @@ public class Qualification {
 
     // no object found - let's create a new one and add it to the map before returning it
     answers = new HashSet<>();
-    questionMap.put(question, answers);
+    questionMap.put(questionId, answers);
     return answers;
   }
-
-  // TODO: Builder Pattern to load Qualification? Would be nice to make them immutable
 
 }
