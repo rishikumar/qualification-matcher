@@ -1,5 +1,7 @@
 package qual.service;
 
+import com.google.inject.Inject;
+import qual.dao.QualificationDao;
 import qual.model.Application;
 import qual.model.Qualification;
 
@@ -11,7 +13,11 @@ public class Matcher {
 
   private Qualification qualification;
 
-  // TODO: Inject the qualification and applicant DAOs here ... via guice
+  @Inject
+  public Matcher(QualificationDao qualificationDao) {
+    this.qualification = null;
+  }
+
 
   public Matcher(Qualification qualification) {
     this.qualification = qualification;
