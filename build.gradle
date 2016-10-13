@@ -9,6 +9,9 @@ repositories {
     mavenCentral()
 }
 
+apply plugin:'application'
+mainClassName = "qual.exec.Bootstrap"
+
 dependencies {
     compile 'com.google.inject:guice:4.0'
 
