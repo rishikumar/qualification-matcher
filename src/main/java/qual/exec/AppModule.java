@@ -11,8 +11,15 @@ import java.io.IOException;
 import java.util.Properties;
 
 
+/**
+ * Guice module that's used for the dependency inject and property file loading into Guice's dependency graph
+ */
 public class AppModule extends AbstractModule {
 
+
+  /**
+   * Configuration setup function for Guice
+   */
   @Override
   protected void configure() {
     loadProperties();
@@ -22,6 +29,9 @@ public class AppModule extends AbstractModule {
     bind(ApplicationDao.class).to(ApplicationDaoImpl.class);
   }
 
+  /**
+   * Load the application properties file and bind them into guice
+   */
   private void loadProperties() {
     Properties properties = new Properties();
 

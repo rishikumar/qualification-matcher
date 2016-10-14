@@ -5,8 +5,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Manages a set of questions and their acceptable answers
+ */
 public class Qualification {
 
+  // Map: Key=questionId, Value=Set of acceptable answers
   private Map<String, Set<String>> questionMap;
 
   public Qualification() {

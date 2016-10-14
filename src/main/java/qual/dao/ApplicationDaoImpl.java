@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of ApplicationDao, read and write capability for Applications
+ */
 public class ApplicationDaoImpl implements ApplicationDao {
 
   private String inputPath;
@@ -25,22 +28,56 @@ public class ApplicationDaoImpl implements ApplicationDao {
     objectMapper = new ObjectMapper();
   }
 
+  /**
+   * Retrieves Applications from the provided input path. Each doocument maps to one Application object
+   *
+   * @return List of Applications
+   */
+  @Override
+  public List<Application> findApplications() {
+    return parseJson();
+  }
+
+
+  /**
+   * Provides the capability to save applications to the output directory. This is used to save applications meet
+   * the qualifications for consideration.
+   *
+   * @param applications the list of applications to save
+   */
+  @Override
+  public void saveApplications(List<Application> applications) {
+    applications.forEach(this::writeApplication);
+  }
+
+  /**
+   * Setup the input paths by finding them on the classpath
+   *
+   * @param inputPath  the input file path as defined in app.properties
+   * @param outputPath the output file path as defined in app.properties
+   */
   private void registerPaths(String inputPath, String outputPath) {
     ClassLoader cl = getClass().getClassLoader();
     this.inputPath = cl.getResource(inputPath).getPath();
     this.outputPath = cl.getResource(outputPath).getPath();
   }
 
-  @Override
-  public List<Application> findApplications() {
-    return parseJson();
-  }
+  /**
+   * Takes a list of files from the input directory and translates them into a list
+   *
+   * @return List of application objects
+   */
 
   private List<Application> parseJson() {
     List<File> fileList = getInputFileList();
     return fileList.stream().map(this::parseApplicationFrom).collect(Collectors.toList());
   }
 
+  /**
+   * Find and return all the files in the input path
+   *
+   * @return List of input applicant files to process
+   */
   private List<File> getInputFileList() {
     try {
       File folder = new File(inputPath);
@@ -58,6 +95,12 @@ public class ApplicationDaoImpl implements ApplicationDao {
 
   }
 
+  /**
+   * Parses an Application object from the provided file
+   *
+   * @param f the file ot parse
+   * @return the application object
+   */
   private Application parseApplicationFrom(File f) {
     Application application = null;
 
@@ -71,11 +114,11 @@ public class ApplicationDaoImpl implements ApplicationDao {
     return application;
   }
 
-
-  @Override
-  public void saveApplications(List<Application> applications) {
-    applications.forEach(this::writeApplication);
-  }
+  /**
+   * Persist an application to the output path. The file name is taking from the applicant's name
+   *
+   * @param application the application to save
+   */
 
   private void writeApplication(Application application) {
     String filename = outputPath + "/" + application.getName() + ".json";

@@ -9,6 +9,10 @@ import qual.model.Qualification;
 
 import java.io.IOException;
 
+
+/**
+ * Implementation of QualificationDao, read and write capability for Applications
+ */
 public class QualificationDaoImpl implements QualificationDao {
 
   private String filename;
@@ -18,11 +22,23 @@ public class QualificationDaoImpl implements QualificationDao {
     this.filename = filename;
   }
 
+  /**
+   * Retrieve the Qualification object from the json source file
+   *
+   * @return the Qualification object
+   */
   @Override
   public Qualification findQualifications() {
     return parseJson();
   }
 
+
+  /**
+   * Parse the incoming file to build the qualification object. The JSON file format doesn't map well to my
+   * Qualification object, so I'm doing the mapping manually by parsing the JSON object directly
+   *
+   * @return the Qualification object
+   */
   private Qualification parseJson() {
     ArrayNode arrayNode = getRootArray();
 
@@ -38,6 +54,12 @@ public class QualificationDaoImpl implements QualificationDao {
     return qualification;
   }
 
+
+  /**
+   * Retrieve the root array object from the json file
+   *
+   * @return an ArrayNode, the root object of the Qualification json file
+   */
   private ArrayNode getRootArray() {
     JsonNode root = getRootNode();
 
@@ -48,6 +70,12 @@ public class QualificationDaoImpl implements QualificationDao {
     return (ArrayNode) root;
   }
 
+
+  /**
+   * Read the root node from the input file
+   *
+   * @return the root node
+   */
   private JsonNode getRootNode() {
     JsonNode root = null;
 
@@ -57,6 +85,7 @@ public class QualificationDaoImpl implements QualificationDao {
     }
     catch (IOException e) {
       e.printStackTrace();
+      throw new RuntimeException(e);
     }
 
     return root;

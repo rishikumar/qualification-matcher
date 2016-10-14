@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * POJO class that represents an application that the user submits. It contains a name, and a list of responses
+ * to questions
+ */
 public class Application {
 
   private String name;

@@ -2,6 +2,9 @@ package qual.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * POJO to manage a question and answer pair submitted by the applicant
+ */
 public class Response {
   private String questionId;
   private String answer;
