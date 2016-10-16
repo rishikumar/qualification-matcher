@@ -44,12 +44,12 @@ public class QualificationDaoImpl implements QualificationDao {
 
     Qualification qualification = new Qualification();
 
-    for (JsonNode node : arrayNode) {
+    arrayNode.forEach((node) -> {
       String questionId = node.get("Id").asText();
       String answer = node.get("Answer").asText();
 
       qualification.add(questionId, answer);
-    }
+    });
 
     return qualification;
   }
